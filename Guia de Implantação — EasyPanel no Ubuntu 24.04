@@ -1,0 +1,64 @@
+Objetivo
+Instalar o Docker e o EasyPanel no Ubuntu Server 24.04 de forma estável, garantindo funcionamento correto e documentação reutilizável.
+
+Pré-requisitos
+- Ubuntu Server 24.04
+- Acesso root ou sudo
+- Portas 3000, 80 e 443 liberadas
+
+1) Atualização do Sistema
+sudo apt update && sudo apt upgrade -y
+
+Caso apareça a tela do sshd_config:
+Escolher: keep the local version currently installed
+
+2) Instalação do Docker
+sudo apt install -y ca-certificates curl gnupg lsb-release git
+sudo apt remove -y docker docker-engine docker.io containerd runc
+curl -fsSL https://get.docker.com | sudo bash
+sudo systemctl enable docker
+sudo systemctl start docker
+
+(Opcional)
+sudo usermod -aG docker $USER
+ 
+3) Instalação do EasyPanel (método oficial e estável)
+mkdir -p ~/easypanel && cd ~/easypanel
+
+Limpeza preventiva:
+docker rm -f easypanel 2>/dev/null
+docker volume rm easypanel-data 2>/dev/null
+
+Instalação:
+curl -fsSL https://get.easypanel.io | bash
+
+Mensagem esperada:
+Easypanel was installed successfully on your server!
+http://SEU_IP:3000
+
+4) Verificação
+docker ps
+
+Deve existir:
+- easypanel rodando na porta 3000
+- traefik rodando nas portas 80 e 443
+
+5) Acesso
+http://SEU_IP:3000
+
+6) Boas práticas
+- Não usar docker run manual para o EasyPanel após instalação
+- Não colar comandos com \ em múltiplas linhas
+- Executar um comando por vez
+
+7) Comandos úteis
+docker ps
+docker ps -a
+docker restart easypanel
+ss -tulnp | grep 3000
+
+Checklist Final
+- Sistema atualizado
+- Docker ativo
+- EasyPanel rodando
+- Painel acessível no navegador
