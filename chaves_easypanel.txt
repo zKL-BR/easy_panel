@@ -1,0 +1,14 @@
+_Key_N8N_
+#############################
+
+_Key_API_Evolution_
+#############################
+
+_Key_Redis_
+#############################
+
+_Key_Postgres_
+#############################
+
+
+>> GERAR CHAVES AQUI: https://acte.ltd/utils/randomkeygen <<
